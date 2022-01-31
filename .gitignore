@@ -27,3 +27,6 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# exclude gcloud service account JSON key
+coviscan-339716-f2652fd3788d.json
