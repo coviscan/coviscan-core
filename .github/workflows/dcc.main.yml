@@ -1,11 +1,11 @@
 name: dcc.main
 on:
+  workflow_dispatch:
   push:
     branches:
     - main
     paths:
     - dcc-validation-decorator/**
-    - .github/workflows/dcc.main.yml
 
 jobs:
   build:
