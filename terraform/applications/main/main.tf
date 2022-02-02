@@ -23,9 +23,5 @@ terraform {
 }
 
 module "cloud-run" {
-  source = "../modules/cloud-run"
-}
-
-module "artifact-repository" {
-  source = "../modules/artifact-repository"
+  source = "../../modules/cloud-run"
 }

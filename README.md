@@ -1,5 +1,5 @@
 # coviscan-core
-This repo includes the frontend javascript libraries and the backend cloud infrastructure
+This repo includes the the backend cloud infrastructure and dcc-validation-decorator
 
 ## Set up AWS authentication
 
