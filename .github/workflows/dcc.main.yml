@@ -5,6 +5,7 @@ on:
     - main
     paths:
     - dcc-validation-decorator/**
+    - .github/workflows/dcc.main.yml
 
 jobs:
   build:
