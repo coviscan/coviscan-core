@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'tf.artifact-repository'
 
 on:
   workflow_dispatch:
@@ -6,9 +6,6 @@ on:
 jobs:
   terraform:
     name: 'Terraform - Create Artifact Repository'
-    defaults:
-      run:
-        working-directory: terraform/applications/artifact-repository
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4
@@ -20,6 +17,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: terraform/applications/artifact-repository
 
     steps:
     # Checkout the repository to the GitHub Actions runner
