@@ -1,5 +1,4 @@
 provider "google" {
-  credentials = file("coviscan-339716-f2652fd3788d.json")
   project     = "coviscan-339716"
   region      = "eu-central-1"
 }
