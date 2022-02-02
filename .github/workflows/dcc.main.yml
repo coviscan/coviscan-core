@@ -48,19 +48,18 @@ jobs:
       env:
         APP_PACKAGES_USERNAME: ${{ github.actor }}
         APP_PACKAGES_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-    - id: 'gcloud-auth'
-      name: 'Authenticate to Google Cloud'
+    - name: Authenticate to Google Cloud
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: ${{ secrets.GCP_SVC_ACC_KEY_ART_REGISTRY }}
         project_id: ${{ secrets.GCP_PROJECT_ID }}
-    - name: docker
+    - name: Authorize Docker push
+      run: gcloud auth configure-docker
+    - name: Build and Push Container
       run: |-
-        gcloud auth configure-docker -q
-
         docker build . \
         --file ./docker/Native \
         --tag "${APP_PACKAGES_URL}:${APP_VERSION}"
         docker push "${APP_PACKAGES_URL}:${APP_VERSION}"
       env:
-        APP_PACKAGES_URL: us-central1-docker.pkg.dev/${{ github.repository }}/dcc-validation-decorator/dcc-validation-decorator
+        APP_PACKAGES_URL: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/dcc-validation-decorator/dcc-validation-decorator
