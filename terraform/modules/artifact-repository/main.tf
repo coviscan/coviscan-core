@@ -24,11 +24,11 @@ resource "google_project_service" "artifactregistry" {
   disable_on_destroy = true
 }
 
-resource "google_artifact_registry_repository" "my-repo" {
+resource "google_artifact_registry_repository" "dcc-validation-decorator" {
   provider = google-beta
 
   location = "us-central1"
-  repository_id = "my-repository"
-  description = "example docker repository"
+  repository_id = "dcc-validation-decorator"
+  description = "Docker repository for dcc-validation-decorator"
   format = "DOCKER"
 }

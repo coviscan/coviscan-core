@@ -3,6 +3,7 @@ provider "google" {
   project     = "coviscan-339716"
   region      = "eu-central-1"
 }
+
 terraform {
   required_providers {
     google = {
