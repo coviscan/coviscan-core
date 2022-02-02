@@ -1,19 +1,16 @@
 <h1 align="center">
-   EU Digital COVID Certificate Validation Decorator
+   Coviscan Digital COVID Certificate Validation Decorator
 </h1>
 
 <p align="center">
-  <a href="https://github.com/eu-digital-green-certificates/dgca-validation-decorator/actions/workflows/ci-main.yml" title="ci-main.yml">
-    <img src="https://github.com/eu-digital-green-certificates/dgca-validation-decorator/actions/workflows/ci-main.yml/badge.svg">
+  <a href="https://github.com/coviscan/coviscan-core/actions/workflows/dcc.main.yml" title="dcc.main">
+    <img src="https://github.com/coviscan/coviscan-core/actions/workflows/dcc.main.yml/badge.svg">
   </a>
   <a href="/../../commits/" title="Last Commit">
-    <img src="https://img.shields.io/github/last-commit/eu-digital-green-certificates/dgca-validation-decorator?style=flat">
+    <img src="https://img.shields.io/github/last-commit/coviscan/coviscan-core?style=flat">
   </a>
   <a href="/../../issues" title="Open Issues">
-    <img src="https://img.shields.io/github/issues/eu-digital-green-certificates/dgca-validation-decorator?style=flat">
-  </a>
-  <a href="./LICENSE" title="License">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat">
+    <img src="https://img.shields.io/github/issues/coviscan/coviscan-core?style=flat">
   </a>
 </p>
 
