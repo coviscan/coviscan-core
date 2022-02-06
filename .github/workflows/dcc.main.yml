@@ -66,7 +66,8 @@ jobs:
       run: |-
         docker build . \
         --file ./docker/Native \
-        --tag "${ECR_REGISTRY}/${ECR_REPOSITORY}:${APP_VERSION}"
+        --tag "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
+        #--tag "${ECR_REGISTRY}/${ECR_REPOSITORY}:${APP_VERSION}"
         #docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:${APP_VERSION}"
         docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
       env:
