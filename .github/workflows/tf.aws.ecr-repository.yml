@@ -34,6 +34,12 @@ jobs:
         role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_AmazonS3FullAccess
         aws-region: ${{ env.AWS_REGION }}
 
+    - name: Authenticate to AWS
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_CreateRepository
+        aws-region: ${{ env.AWS_REGION }}
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1

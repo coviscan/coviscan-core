@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "foo" {
+resource "aws_ecr_repository" "dcc-validation-decorator" {
   name = "dcc-validation-decorator"
   image_tag_mutability = "MUTABLE"
 
