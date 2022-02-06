@@ -1,11 +1,15 @@
-name: 'tf.artifact-repository'
+name: 'tf.aws.ecr-repository'
 
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read 
+
 jobs:
   terraform:
-    name: 'Create Artifact Repository'
+    name: 'Create AWS ECR Repository'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4
@@ -17,7 +21,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform/applications/artifact-repository
+        working-directory: terraform/aws/applications/ecr-repository
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -27,15 +31,8 @@ jobs:
     - name: Authenticate to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_AmazonS3FullAccess
         aws-region: ${{ env.AWS_REGION }}
-
-    - name: Authenticate to Google Cloud
-      uses: 'google-github-actions/auth@v0'
-      with:
-        credentials_json: ${{ secrets.GCP_SVC_ACC_KEY_TERRAFORM }}
-        project_id: ${{ secrets.GCP_PROJECT_ID }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform

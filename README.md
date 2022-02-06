@@ -16,3 +16,9 @@ set the default project env var
 ```bash
 export GOOGLE_PROJECT=coviscan-339716
 ```
+
+## Setup OIDC provider for Github in AWS
+
+see links:
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
+https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
