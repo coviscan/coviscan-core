@@ -28,6 +28,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Authenticate to AWS
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_CreateRepository
+        aws-region: ${{ env.AWS_REGION }}
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -45,12 +51,6 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan
-
-    - name: Authenticate to AWS
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_CreateRepository
-        aws-region: ${{ env.AWS_REGION }}
 
     # Build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
