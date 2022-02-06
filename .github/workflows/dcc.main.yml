@@ -57,16 +57,18 @@ jobs:
     - name: Authenticate to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_CreateRepository
+        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_PushPull
         aws-region: ${{ env.AWS_REGION }}
-    - name: Authorize Docker push
-      run: aws ecr get-login-password --region region | docker login --username AWS --password-stdin 161247518108.dkr.ecr.eu-central-1.amazonaws.com
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
     - name: Build and Push Container
       run: |-
         docker build . \
         --file ./docker/Native \
-        --tag "${APP_PACKAGES_URL}:${APP_VERSION}"
-        #docker push "${APP_PACKAGES_URL}:${APP_VERSION}"
-        docker push "${APP_PACKAGES_URL}:latest"
+        --tag "${ECR_REGISTRY}/${ECR_REPOSITORY}:${APP_VERSION}"
+        #docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:${APP_VERSION}"
+        docker push "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
       env:
-        APP_PACKAGES_URL: 161247518108.dkr.ecr.eu-central-1.amazonaws.com/dcc-validation-decorator
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: dcc-validation-decorator

@@ -30,7 +30,6 @@ Add AWS role in IAM with trust relationship like
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "",
             "Effect": "Allow",
             "Principal": {
                 "Federated": "arn:aws:iam::161247518108:oidc-provider/token.actions.githubusercontent.com"
