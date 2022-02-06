@@ -17,6 +17,8 @@ jobs:
       run:
         working-directory: dcc-validation-decorator
     runs-on: ubuntu-20.04
+    env:
+      AWS_REGION: eu-central-1
     steps:
     - uses: actions/setup-java@v2
       with:
@@ -56,6 +58,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_CreateRepository
+        aws-region: ${{ env.AWS_REGION }}
     - name: Authorize Docker push
       run: aws ecr get-login-password --region region | docker login --username AWS --password-stdin 161247518108.dkr.ecr.eu-central-1.amazonaws.com
     - name: Build and Push Container
