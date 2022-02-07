@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       AWS_REGION: eu-central-1
+      AWS_ACCOUNT_ID: 161247518108
     steps:
     - uses: actions/setup-java@v2
       with:
@@ -57,7 +58,7 @@ jobs:
     - name: Authenticate to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::161247518108:role/GithubOIDC_Coviscan_ECR_PushPull
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_ecr_pushpull
         aws-region: ${{ env.AWS_REGION }}
     - name: Login to Amazon ECR
       id: login-ecr

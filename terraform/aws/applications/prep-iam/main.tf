@@ -19,6 +19,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-module "ecr-repository" {
-  source = "../../modules/ecr-repository"
+module "prep-iam" {
+  source = "../../modules/prep-iam"
 }

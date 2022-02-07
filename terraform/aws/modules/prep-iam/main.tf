@@ -21,7 +21,7 @@ locals {
   })
 }
 
-resource "aws_iam_openid_connect_provider" "token.actions.githubusercontent.com" {
+resource "aws_iam_openid_connect_provider" "token_actions_githubusercontent_com" {
   url = "https://token.actions.githubusercontent.com"
   client_id_list = [
     "sts.amazonaws.com",
@@ -30,6 +30,8 @@ resource "aws_iam_openid_connect_provider" "token.actions.githubusercontent.com"
     "6938fd4d98bab03faadb97b34396831e3780aea1"
   ]
 }
+
+/* ==================== */
 
 resource "aws_iam_role" "coviscan_ecr_createrepository" {
   name = "coviscan_ecr_createrepository"
@@ -61,4 +63,101 @@ resource "aws_iam_policy" "coviscan_ecr_createrepository" {
 resource "aws_iam_role_policy_attachment" "coviscan_ecr_createrepository" {
   role       = aws_iam_role.coviscan_ecr_createrepository.name
   policy_arn = aws_iam_policy.coviscan_ecr_createrepository.arn
+}
+
+resource "aws_iam_role_policy_attachment" "coviscan_ecr_createrepository2" {
+  role       = aws_iam_role.coviscan_ecr_createrepository.name
+  policy_arn = aws_iam_policy.coviscan_s3_fullaccess.arn
+}
+
+/* ==================== */
+
+resource "aws_iam_role" "coviscan_ecr_pushpull" {
+  name = "coviscan_ecr_pushpull"
+  assume_role_policy = local.assume_role_policy
+}
+
+resource "aws_iam_policy" "coviscan_ecr_pushpull" {
+  name        = "coviscan_ecr_pushpull"
+  description = ""
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": [
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:CompleteLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:InitiateLayerUpload",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:PutImage"
+        ],
+        "Resource": "arn:aws:ecr:*:${data.aws_caller_identity.current.account_id}:repository/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "coviscan_ecr_login" {
+  name        = "coviscan_ecr_login"
+  description = ""
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": [
+          "ecr:GetAuthorizationToken"
+        ],
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "coviscan_ecr_pushpull" {
+  role       = aws_iam_role.coviscan_ecr_pushpull.name
+  policy_arn = aws_iam_policy.coviscan_ecr_pushpull.arn
+}
+
+resource "aws_iam_role_policy_attachment" "coviscan_ecr_login" {
+  role       = aws_iam_role.coviscan_ecr_pushpull.name
+  policy_arn = aws_iam_policy.coviscan_ecr_login.arn
+}
+
+/* ==================== */
+
+resource "aws_iam_role" "coviscan_s3_fullaccess" {
+  name = "coviscan_s3_fullaccess"
+  assume_role_policy = local.assume_role_policy
+}
+
+resource "aws_iam_policy" "coviscan_s3_fullaccess" {
+  name        = "coviscan_s3_fullaccess"
+  description = ""
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:*",
+          "s3-object-lambda:*"
+        ],
+        "Resource": "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "coviscan_s3_fullaccess" {
+  role       = aws_iam_role.coviscan_s3_fullaccess.name
+  policy_arn = aws_iam_policy.coviscan_s3_fullaccess.arn
 }

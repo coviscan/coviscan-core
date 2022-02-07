@@ -44,3 +44,26 @@ Add AWS role in IAM with trust relationship like
     ]
 }
 ```
+
+### Bootstrapping the AWS IAM roles
+
+In order to initially create all IAM roles that you need to assume in Github actions you need one bootstrap user with AWS credentials that has the following policies attached:
+
+* IAMFullAccess (In order to create the IAM roles)
+* AmazonS3FullAccess (In order to initiate the Terraform S3 backend)
+* A custom role with all OIDC permissions allowing the following actions
+    * iam:RemoveClientIDFromOpenIDConnectProvider
+    * iam:ListOpenIDConnectProviderTags
+    * iam:UpdateOpenIDConnectProviderThumbprint
+    * iam:UntagOpenIDConnectProvider
+    * iam:AddClientIDToOpenIDConnectProvider
+    * iam:DeleteOpenIDConnectProvider
+    * iam:GetOpenIDConnectProvider
+    * iam:TagOpenIDConnectProvider
+    * iam:CreateOpenIDConnectProvider
+
+After setting up the initial bootstrap user you have to execute the bootstraping script
+
+```bash
+bash /bin/tf/aws/bootstrap_create_iam_roles.sh 
+```
