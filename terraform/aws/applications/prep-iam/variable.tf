@@ -3,11 +3,6 @@ variable "aws_region" {
   description = "AWS region"
 }
 
-variable "aws_backend_bucket" {
-  type = string
-  description = "Name of the AWS S3 terraform backend bucket"
-}
-
 variable "github_org" {
   type = string
   description = "Github organization name"
