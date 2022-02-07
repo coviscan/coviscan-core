@@ -21,5 +21,5 @@ provider "aws" {
 
 module "ecr-repository" {
   source = "../../modules/ecr-repository"
-  aws_ecr_repository_name = ""
+  aws_ecr_repository_name = "${var.aws_ecr_repository_name}"
 }
