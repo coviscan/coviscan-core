@@ -7,18 +7,19 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "coviscan-terraform"
+    bucket = "${var.aws_backend_bucket}"
     key    = "terraform.tfstate"
-    region = "eu-central-1"
+    region = "${var.aws_region}"
     workspace_key_prefix = "aws"
   }
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "eu-central-1"
+  region = "${var.aws_region}"
 }
 
 module "ecr-repository" {
   source = "../../modules/ecr-repository"
+  aws_ecr_repository_name = ""
 }

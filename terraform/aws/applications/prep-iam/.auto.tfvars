@@ -1,0 +1,5 @@
+aws_region = "eu-central-1"
+aws_backend_bucket = "coviscan-terraform"
+github_org = "coviscan"
+github_repo = "coviscan-core"
+resource_name_prefix = "coviscan"

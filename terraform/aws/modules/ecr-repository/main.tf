@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "dcc-validation-decorator" {
-  name = "dcc-validation-decorator"
+resource "aws_ecr_repository" "aws_ecr_repository" {
+  name = "${var.aws_ecr_repository_name}"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

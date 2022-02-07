@@ -7,18 +7,21 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "coviscan-terraform"
+    bucket = "${var.aws_backend_bucket}"
     key    = "terraform.tfstate"
-    region = "eu-central-1"
+    region = "${var.aws_region}"
     workspace_key_prefix = "aws"
   }
 }
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "eu-central-1"
+  region = "${var.aws_region}"
 }
 
 module "prep-iam" {
   source = "../../modules/prep-iam"
+  github_org = "${var.github_org}"
+  github_repo = "${var.github_repo}"
+  resource_name_prefix = "${var.resource_name_prefix}"
 }
