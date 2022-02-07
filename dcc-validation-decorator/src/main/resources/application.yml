@@ -20,7 +20,7 @@ dgc:
   #### Validation Decorator URI without trailing slash
   # serviceUrl: http://localhost:8080
   serviceUrl: https://dgca-validation-decorator-s5id3424fq-uc.a.run.app
-  keyStoreFile: /certs/dev-decorator.jks
+  keyStoreFile: certs/dev-decorator.jks
   keyStorePassword: changeMe
   privateKeyPassword: changeMe
   #### activeSignKey must be one of signAliases
