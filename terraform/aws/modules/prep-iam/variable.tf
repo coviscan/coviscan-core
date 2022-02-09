@@ -1,6 +1,3 @@
-variable "deployment" {}
-variable "service_name" {}
-
 variable "github_org" {
   type = string
   description = "Github organization name"

@@ -5,7 +5,7 @@ resource "aws_iam_role" "s3_fullaccess" {
 }
 
 resource "aws_iam_policy" "s3_fullaccess" {
-  name        = "${var.resource_name_prefix}_s3_fullaccess"
+  name = "${var.resource_name_prefix}_s3_fullaccess"
   description = ""
 
   policy = jsonencode({

@@ -19,10 +19,6 @@ resource "aws_iam_role" "execution" {
   })
 }
 
-output "execution_role_arn" {
-  value = "${aws_iam_role.execution.arn}"
-}
-
 resource "aws_iam_policy" "execution" {
   name = "${var.resource_name_prefix}_${var.deployment}_${var.service_name}_execution"
 
@@ -48,16 +44,6 @@ resource "aws_iam_policy" "execution" {
         "ecr:GetAuthorizationToken"
       ],
       "Resource": "*"
-    }, {
-      "Effect": "Allow",
-      "Action": [
-        "ssm:GetParameters",
-        "ssm:GetParameter"
-      ],
-      "Resource": [
-        "arn:aws:ssm:eu-west-2:${local.account_id}:parameter/${var.deployment}/${var.service_name}/*",
-        "arn:aws:ssm:eu-west-2:${local.account_id}:parameter/${var.deployment}/ecs-app-shared/*"
-      ]
     }]
   })
 }
@@ -87,12 +73,4 @@ resource "aws_iam_role" "task" {
       }
     ]
   })
-}
-
-output "task_role_arn" {
-  value = "${aws_iam_role.task.arn}"
-}
-
-output "task_role_name" {
-  value = "${aws_iam_role.task.name}"
 }

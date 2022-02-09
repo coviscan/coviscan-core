@@ -9,13 +9,13 @@ output "cluster_id" {
 resource "aws_ecs_task_definition" "cluster" {
   family                = "${local.identifier}"
   container_definitions = "${var.task_definition}"
-  execution_role_arn    = "${module.cluster_ecs_roles.execution_role_arn}"
-  task_role_arn         = "${module.cluster_ecs_roles.task_role_arn}"
+  execution_role_arn    = "${aws_iam_role.execution.arn}"
+  task_role_arn         = "${aws_iam_role.task.arn}"
   network_mode          = "bridge"
 }
 
 output "task_role_name" {
-  value = "${module.cluster_ecs_roles.task_role_name}"
+  value = "${aws_iam_role.task.name}"
 }
 
 resource "aws_ecs_service" "cluster" {

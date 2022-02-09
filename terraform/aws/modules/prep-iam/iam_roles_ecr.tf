@@ -31,11 +31,6 @@ resource "aws_iam_role_policy_attachment" "ecr_createrepository" {
   policy_arn = aws_iam_policy.ecr_createrepository.arn
 }
 
-resource "aws_iam_role_policy_attachment" "ecr_createrepository2" {
-  role       = aws_iam_role.ecr_createrepository.name
-  policy_arn = aws_iam_policy.s3_fullaccess.arn
-}
-
 /* ==================== */
 
 resource "aws_iam_role" "ecr_pushpull" {

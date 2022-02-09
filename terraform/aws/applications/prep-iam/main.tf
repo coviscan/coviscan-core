@@ -24,6 +24,4 @@ module "prep-iam" {
   github_org = "${var.github_org}"
   github_repo = "${var.github_repo}"
   resource_name_prefix = "${var.resource_name_prefix}"
-  deployment = "${var.deployment}"
-  service_name = "${var.cluster}"
 }
