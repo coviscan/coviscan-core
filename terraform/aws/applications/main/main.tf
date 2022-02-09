@@ -18,3 +18,10 @@ terraform {
 provider "aws" {
   region = "${var.aws_region}"
 }
+
+module "ecs-app" {
+  source = "../../modules/ecs-app"
+  resource_name_prefix = "${var.resource_name_prefix}"
+  deployment = "${var.deployment}"
+  service_name = "${var.cluster}"
+}

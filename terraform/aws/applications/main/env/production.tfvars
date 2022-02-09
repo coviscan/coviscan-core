@@ -1,1 +1,5 @@
 aws_region = "eu-central-1"
+resource_name_prefix = "coviscan"
+stage_suffix = "${terraform.workspace == "prod" ? "" : -terraform.workspace}"
+deployment = "coviscan-deployment${stage_suffix}"
+service_name = "coviscan-service${stage_suffix}"

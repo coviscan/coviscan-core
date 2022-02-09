@@ -5,13 +5,8 @@ variable "deployment" {}
 variable "domain" {}
 variable "task_definition" {}
 variable "vpc_id" {}
-variable "tools_account_id" {}
 variable "instance_security_group_id" {}
 variable "certificate_arn" {}
-
-variable "image_name" {
-  default = ""
-}
 
 variable "lb_subnets" {
   type = "list"
@@ -46,7 +41,7 @@ variable "health_check_interval" {
 }
 
 variable "health_check_timeout" {
-  default = 5
+  default = 10
 }
 
 variable "health_check_http_codes" {

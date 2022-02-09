@@ -13,7 +13,7 @@ resource "aws_lb" "cluster" {
 
 resource "aws_lb_target_group" "task" {
   name                 = "${local.identifier}-task"
-  port                 = "8443"
+  port                 = "8080"
   protocol             = "HTTPS"
   target_type          = "instance"
   vpc_id               = "${var.vpc_id}"

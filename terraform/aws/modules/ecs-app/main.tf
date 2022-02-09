@@ -6,15 +6,6 @@ output "cluster_id" {
   value = "${aws_ecs_cluster.cluster.id}"
 }
 
-module "cluster_ecs_roles" {
-  source = "../ecs_iam_role_pair"
-
-  deployment       = "${var.deployment}"
-  service_name     = "${var.cluster}"
-  tools_account_id = "${var.tools_account_id}"
-  image_name       = "${var.image_name}"
-}
-
 resource "aws_ecs_task_definition" "cluster" {
   family                = "${local.identifier}"
   container_definitions = "${var.task_definition}"
