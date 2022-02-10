@@ -24,5 +24,10 @@ module "ecs-app" {
   source = "../../modules/ecs-app"
   resource_name_prefix = "${var.resource_name_prefix}"
   deployment = "${var.deployment}"
-  service_name = "${var.cluster}"
+  service_name = "${var.service_name}"
+  cluster = "${var.cluster}"
+  container_name = "dcc-validation-decorator"
+  container_port = "8080"
+  task_definition = "${var.task_definition}"
+  instance_security_group_id = ""
 }

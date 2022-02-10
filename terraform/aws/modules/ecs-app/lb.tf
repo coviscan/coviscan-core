@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "task" {
   port                 = "8080"
   protocol             = "HTTPS"
   target_type          = "instance"
-  vpc_id               = "${var.vpc_id}"
+  vpc_id               = aws_vpc.main.id
   deregistration_delay = 15
   slow_start           = 30
 
@@ -54,10 +54,15 @@ resource "aws_lb_listener" "cluster_https" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS-1-1-2017-01"
-  certificate_arn   = "${var.certificate_arn}"
+  certificate_arn   = aws_acm_certificate.cert.arn
 
   default_action {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.task.arn}"
   }
+}
+
+resource "aws_lb_listener_certificate" "example" {
+  listener_arn    = aws_lb_listener.cluster_https.arn
+  certificate_arn = aws_acm_certificate.cert.arn
 }

@@ -2,7 +2,7 @@ resource "aws_security_group" "lb" {
   name        = "${local.identifier}-lb"
   description = "${local.identifier}-lb"
 
-  vpc_id = "${var.vpc_id}"
+  vpc_id = aws_vpc.main.id
 }
 
 output "lb_sg_id" {

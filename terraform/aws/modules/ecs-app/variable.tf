@@ -4,9 +4,7 @@ variable "container_port" {}
 variable "deployment" {}
 variable "domain" {}
 variable "task_definition" {}
-variable "vpc_id" {}
 variable "instance_security_group_id" {}
-variable "certificate_arn" {}
 
 variable "lb_subnets" {
   type = "list"
