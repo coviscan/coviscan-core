@@ -16,13 +16,13 @@ jobs:
       TF_WORKSPACE: dev
       AWS_REGION: eu-central-1
       AWS_ACCOUNT_ID: 161247518108
-    environment: production
+    environment: dev
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
-        working-directory: terraform/aws/applications/ecs-app
+        working-directory: terraform/aws/applications/main
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -55,4 +55,4 @@ jobs:
 
     # Build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      run: terraform apply -auto-approve
+      run: terraform apply -auto-approve -var-file="env/dev.tfvars"
