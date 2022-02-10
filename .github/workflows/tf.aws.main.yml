@@ -1,4 +1,4 @@
-name: 'tf.aws.ecr-repository'
+name: 'tf.aws.main'
 
 on:
   workflow_dispatch:
