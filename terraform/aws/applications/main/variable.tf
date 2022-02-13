@@ -63,6 +63,10 @@ variable "container_memory" {
   default     = 512
 }
 
+variable "container_image" {
+  description = "Docker image to be launched"
+}
+
 variable "health_check_path" {
   description = "Http path for task health check"
   default     = "/health"
