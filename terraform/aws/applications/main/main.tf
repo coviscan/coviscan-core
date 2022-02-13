@@ -11,6 +11,7 @@ terraform {
     key    = "terraform.tfstate"
     region = "eu-central-1"
     workspace_key_prefix = "aws"
+    role_arn = "arn:aws:iam::161247518108:role/coviscan_s3_fullaccess"
   }
 }
 
