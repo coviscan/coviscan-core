@@ -4,6 +4,11 @@ variable "aws_region" {
   default     = "eu-central-1"
 }
 
+variable "resource_name_prefix" {
+  type = string
+  description = "Prefix of the resource names like roles, policies etc."
+}
+
 variable "environment" {
   description = "the name of your environment, e.g. \"prod\""
   default     = "prod"

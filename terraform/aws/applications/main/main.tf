@@ -65,6 +65,7 @@ module "ecs" {
   container_port              = var.container_port
   container_cpu               = var.container_cpu
   container_memory            = var.container_memory
+  container_image             = var.container_image
   service_desired_count       = var.service_desired_count
   container_environment = [
     { name = "LOG_LEVEL",
@@ -72,6 +73,5 @@ module "ecs" {
     { name = "PORT",
     value = var.container_port }
   ]
-  aws_ecr_repository_url = module.ecr-repository.aws_ecr_repository_url
 }
 
