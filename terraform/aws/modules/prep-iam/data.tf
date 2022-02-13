@@ -18,6 +18,14 @@ locals {
           "token.actions.githubusercontent.com:sub" : "repo:${var.github_org}/${var.github_repo}:*"
         }
       }
+    },
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "AWS": "arn:aws:iam::${local.account_id}:role/${var.resource_name_prefix}_iam_manager"
+      },
+      "Effect": "Allow",
+      "Sid": ""
     }]
   })
 }
