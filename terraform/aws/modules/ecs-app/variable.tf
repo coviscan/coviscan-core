@@ -7,7 +7,7 @@ variable "task_definition" {}
 variable "instance_security_group_id" {}
 
 variable "lb_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 locals {
