@@ -13,7 +13,8 @@ resource "aws_iam_policy" "ecr_createrepository" {
           "ecr:ListTagsForResource",
           "ecr:DeleteRepository",
           "ecr:PutLifecyclePolicy",
-          "ecr:GetLifecyclePolicy"
+          "ecr:GetLifecyclePolicy",
+          "ecr:DeleteLifecyclePolicy"
         ],
         "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*"
       }

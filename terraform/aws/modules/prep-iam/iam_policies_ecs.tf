@@ -9,7 +9,20 @@ resource "aws_iam_policy" "ecs" {
         "Effect": "Allow",
         "Action": [
           "ecs:CreateCluster",
-          "ecs:ListClusters"
+          "ecs:CreateService",
+          "ecs:DescribeClusters",
+          "ecs:DescribeServices",
+          "ecs:DescribeTaskDefinition",
+          "ecs:DeregisterTaskDefinition",
+          "ecs:ListClusters",
+          "ecs:ListServices",
+          "ecs:ListTaskDefinitions",
+          "ecs:RegisterTaskDefinition",
+          "ecs:DeleteCluster",
+          "ecs:DeleteService",
+          "ecs:UpdateCluster",
+          "ecs:UpdateService",
+          "ecs:UpdateServicePrimaryTaskSet"
         ],
         "Resource": [
           "*"

@@ -19,6 +19,7 @@ resource "aws_iam_policy" "iam" {
           "iam:ListPolicies",
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole",
           "iam:GetPolicy",
           "iam:GetRole",
           "iam:GetRolePolicy",
@@ -34,6 +35,15 @@ resource "aws_iam_policy" "iam" {
         "Resource": [
           "arn:aws:iam::${local.account_id}:policy/${var.resource_name_prefix}*",
           "arn:aws:iam::${local.account_id}:role/${var.resource_name_prefix}*"
+        ]
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "iam:CreateServiceLinkedRole"    
+        ],
+        "Resource": [
+          "arn:aws:iam::${local.account_id}:role/aws-service-role/*"
         ]
       }
     ]

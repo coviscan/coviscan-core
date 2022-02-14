@@ -10,8 +10,11 @@ resource "aws_iam_policy" "logs" {
         "Action": [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
+          "logs:DescribeLogGroups",
+          "logs:DescribeLogStreams",
           "logs:PutLogEvents",
-          "logs:DescribeLogStreams"
+          "logs:ListTagsLogGroup",
+          "logs:DeleteLogGroup"
         ],
         "Resource": [
           "arn:aws:logs:*:${local.account_id}:*"
