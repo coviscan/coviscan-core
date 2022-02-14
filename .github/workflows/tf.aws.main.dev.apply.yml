@@ -1,4 +1,4 @@
-name: 'tf.aws.main'
+name: 'tf.aws.main.dev.apply'
 
 on:
   workflow_dispatch:

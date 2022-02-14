@@ -70,7 +70,7 @@ variable "container_image" {
 
 variable "health_check_path" {
   description = "Http path for task health check"
-  default     = "/health"
+  default     = "/identity"
 }
 
 variable "tsl_certificate_arn" {

@@ -1,0 +1,50 @@
+name: 'tf.aws.main.dev.apply'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read 
+
+jobs:
+  terraform:
+    name: 'Create AWS ECS Fargate app'
+    runs-on: ubuntu-latest
+    env:
+      TF_VERSION: 1.1.4
+      TF_WORKSPACE: dev
+      AWS_REGION: eu-central-1
+      AWS_ACCOUNT_ID: 161247518108
+    environment: dev
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform/aws/applications/main
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Authenticate to AWS
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_iam_main
+        aws-region: ${{ env.AWS_REGION }}
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+
+    # Destroy infrastructure according to Terraform configuration files
+    - name: Terraform Apply
+      run: terraform destroy -auto-approve -var-file="env/dev.tfvars"
