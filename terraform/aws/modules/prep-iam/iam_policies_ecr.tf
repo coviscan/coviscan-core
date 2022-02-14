@@ -6,14 +6,14 @@ resource "aws_iam_policy" "ecr_createrepository" {
     "Version": "2012-10-17",
     "Statement": [
       {
-        "Sid": "VisualEditor0",
         "Effect": "Allow",
         "Action": [
           "ecr:CreateRepository",
           "ecr:DescribeRepositories",
           "ecr:ListTagsForResource",
           "ecr:DeleteRepository",
-          "ecr:PutLifecyclePolicy"
+          "ecr:PutLifecyclePolicy",
+          "ecr:GetLifecyclePolicy"
         ],
         "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*"
       }

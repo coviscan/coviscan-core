@@ -17,6 +17,7 @@ resource "aws_iam_policy" "iam" {
           "iam:UpdateAssumeRolePolicy",
           "iam:ListRoles",
           "iam:ListPolicies",
+          "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
           "iam:GetPolicy",
           "iam:GetRole",
