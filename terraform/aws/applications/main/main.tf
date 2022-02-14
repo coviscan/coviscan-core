@@ -48,11 +48,6 @@ module "alb" {
   health_check_path   = var.health_check_path
 }
 
-module "ecr-repository" {
-  source      = "../../modules/ecr"
-  aws_ecr_repository_name = var.aws_ecr_repository_name
-}
-
 module "ecs" {
   source                      = "../../modules/ecs"
   name                        = var.resource_name_prefix

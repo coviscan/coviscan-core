@@ -24,11 +24,6 @@ variable "availability_zones" {
   default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
 }
 
-variable "aws_ecr_repository_name" {
-  type = string
-  description = "Name of the ECR repository to be created"
-}
-
 variable "cidr" {
   description = "The CIDR block for the VPC."
   default     = "10.0.0.0/16"
