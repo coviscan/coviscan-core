@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Create AWS ECS Fargate app'
+    name: 'Create AWS ECS Fargate stack'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4

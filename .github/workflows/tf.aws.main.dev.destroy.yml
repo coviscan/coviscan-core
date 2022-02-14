@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Create AWS ECS Fargate app'
+    name: 'Destroy AWS ECS Fargate stack'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4
@@ -46,5 +46,5 @@ jobs:
       run: terraform init
 
     # Destroy infrastructure according to Terraform configuration files
-    - name: Terraform Apply
+    - name: Terraform Destroy
       run: terraform destroy -auto-approve -var-file="env/dev.tfvars"
