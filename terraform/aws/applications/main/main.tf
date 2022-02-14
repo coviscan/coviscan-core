@@ -70,7 +70,9 @@ module "ecs" {
     { name = "LOG_LEVEL",
     value = "DEBUG" },
     { name = "PORT",
-    value = var.container_port }
+    value = var.container_port },
+    { name = "SPRING_PROFILES_ACTIVE",
+    value = "cloud" }
   ]
 }
 
