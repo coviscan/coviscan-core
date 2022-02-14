@@ -22,7 +22,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform/aws/applications/ecr-repository
+        working-directory: terraform/aws/applications/ecr
 
     steps:
     # Checkout the repository to the GitHub Actions runner
