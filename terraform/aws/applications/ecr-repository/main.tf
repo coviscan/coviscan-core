@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "coviscan-terraform"
-    key    = "terraform.tfstate"
+    key    = "ecr/terraform.tfstate"
     region = "eu-central-1"
     workspace_key_prefix = "aws"
   }
