@@ -32,7 +32,7 @@ jobs:
     - name: Authenticate to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_ecr_createrepository
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_iam_main
         aws-region: ${{ env.AWS_REGION }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token

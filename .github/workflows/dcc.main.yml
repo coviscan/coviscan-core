@@ -58,7 +58,7 @@ jobs:
     - name: Authenticate to AWS
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_ecr_pushpull
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/coviscan_iam_main
         aws-region: ${{ env.AWS_REGION }}
     - name: Login to Amazon ECR
       id: login-ecr

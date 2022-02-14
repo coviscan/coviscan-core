@@ -1,9 +1,3 @@
-
-resource "aws_iam_role" "ecr_createrepository" {
-  name = "${var.resource_name_prefix}_ecr_createrepository"
-  assume_role_policy = local.assume_role_policy
-}
-
 resource "aws_iam_policy" "ecr_createrepository" {
   name        = "${var.resource_name_prefix}_ecr_createrepository"
   description = ""
@@ -27,16 +21,11 @@ resource "aws_iam_policy" "ecr_createrepository" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_createrepository" {
-  role       = aws_iam_role.ecr_createrepository.name
+  role       = aws_iam_role.main.name
   policy_arn = aws_iam_policy.ecr_createrepository.arn
 }
 
 /* ==================== */
-
-resource "aws_iam_role" "ecr_pushpull" {
-  name = "${var.resource_name_prefix}_ecr_pushpull"
-  assume_role_policy = local.assume_role_policy
-}
 
 resource "aws_iam_policy" "ecr_pushpull" {
   name        = "${var.resource_name_prefix}_ecr_pushpull"
@@ -83,11 +72,11 @@ resource "aws_iam_policy" "ecr_login" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_pushpull" {
-  role       = aws_iam_role.ecr_pushpull.name
+  role       = aws_iam_role.main.name
   policy_arn = aws_iam_policy.ecr_pushpull.arn
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_login" {
-  role       = aws_iam_role.ecr_pushpull.name
+  role       = aws_iam_role.main.name
   policy_arn = aws_iam_policy.ecr_login.arn
 }
