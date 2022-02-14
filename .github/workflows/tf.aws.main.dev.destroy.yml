@@ -1,4 +1,4 @@
-name: 'tf.aws.main.dev.apply'
+name: 'tf.aws.main.dev.destroy'
 
 on:
   workflow_dispatch:
