@@ -18,6 +18,7 @@ resource "aws_iam_policy" "iam" {
           "iam:ListRoles",
           "iam:ListPolicies",
           "iam:ListRolePolicies",
+          "iam:ListPolicyVersions",
           "iam:ListAttachedRolePolicies",
           "iam:ListInstanceProfilesForRole",
           "iam:GetPolicy",
