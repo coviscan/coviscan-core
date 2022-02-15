@@ -1,8 +1,7 @@
 resource "aws_lb" "main" {
   name               = "${var.name}-alb-${var.environment}"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = var.alb_security_groups
+  internal           = true
+  load_balancer_type = "network"
   subnets            = var.subnets.*.id
 
   enable_deletion_protection = false
@@ -16,7 +15,7 @@ resource "aws_lb" "main" {
 resource "aws_alb_target_group" "main" {
   name        = "${var.name}-tg-${var.environment}"
   port        = 80
-  protocol    = "HTTP"
+  protocol    = "TCP"
   vpc_id      = var.vpc_id
   target_type = "ip"
 
@@ -40,14 +39,14 @@ resource "aws_alb_target_group" "main" {
 resource "aws_alb_listener" "http" {
   load_balancer_arn = aws_lb.main.id
   port              = 80
-  protocol          = "HTTP"
+  protocol          = "TCP"
 
   default_action {
     type = "redirect"
 
     redirect {
       port        = 443
-      protocol    = "HTTPS"
+      protocol    = "TLS"
       status_code = "HTTP_301"
     }
   }
@@ -57,7 +56,7 @@ resource "aws_alb_listener" "http" {
 resource "aws_alb_listener" "https" {
     load_balancer_arn = aws_lb.main.id
     port              = 443
-    protocol          = "HTTPS"
+    protocol          = "TLS"
 
     ssl_policy        = "ELBSecurityPolicy-2016-08"
     certificate_arn   = var.alb_tls_cert_arn
@@ -70,4 +69,12 @@ resource "aws_alb_listener" "https" {
 
 output "aws_alb_target_group_arn" {
   value = aws_alb_target_group.main.arn
+}
+
+output "aws_lb_arn" {
+  value = aws_lb.main.arn
+}
+
+output "aws_lb_dns_name" {
+  value = aws_lb.main.dns_name
 }
