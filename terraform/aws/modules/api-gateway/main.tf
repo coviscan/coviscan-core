@@ -66,8 +66,3 @@ resource "aws_api_gateway_deployment" "main" {
     create_before_destroy = true
   }
 }
-
-resource "aws_api_gateway_vpc_link" "main" {
-  name = "${var.name}-gateway_vpc_link-${var.environment}"
-  target_arns = [var.aws_lb_arn]
-}
