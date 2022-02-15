@@ -1,5 +1,5 @@
-resource "aws_security_group" "alb" {
-  name   = "${var.name}-sg-alb-${var.environment}"
+resource "aws_security_group" "lb" {
+  name   = "${var.name}-sg-lb-${var.environment}"
   vpc_id = var.vpc_id
 
   ingress {
@@ -27,7 +27,7 @@ resource "aws_security_group" "alb" {
   }
 
   tags = {
-    Name        = "${var.name}-sg-alb-${var.environment}"
+    Name        = "${var.name}-sg-lb-${var.environment}"
     Environment = var.environment
   }
 }
