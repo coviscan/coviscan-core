@@ -68,6 +68,10 @@ resource "aws_alb_listener" "https" {
     }
 }
 
+output "aws_alb_id" {
+  value = aws_lb.main.id
+}
+
 output "aws_alb_target_group_arn" {
   value = aws_alb_target_group.main.arn
 }

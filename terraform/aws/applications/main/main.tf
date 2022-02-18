@@ -56,7 +56,7 @@ module "lb" {
   environment         = var.environment
   alb_tls_cert_arn    = var.tsl_certificate_arn
   health_check_path   = var.health_check_path
-  aws_alb_target_group_arn = module.alb.aws_alb_target_group_arn
+  aws_alb_id          = module.alb.aws_alb_id
 }
 
 module "ecs" {

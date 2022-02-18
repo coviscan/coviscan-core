@@ -98,6 +98,23 @@ resource "aws_iam_policy" "ec2" {
             "ec2:DescribeTags"
         ],
         "Resource": "*"
+      },
+      {  
+         "Effect":"Allow",
+         "Action":[  
+            "ec2:CreateVpcEndpointServiceConfiguration",
+            "ec2:DeleteVpcEndpointServiceConfigurations",
+            "ec2:DescribeVpcEndpointServiceConfigurations",
+            "ec2:ModifyVpcEndpointServicePermissions"
+         ],
+         "Resource":"*"
+      },
+      {  
+         "Effect":"Allow",
+         "Action":[  
+            "elasticloadbalancing:DescribeLoadBalancers"
+         ],
+         "Resource":"*"
       }
     ]
   })

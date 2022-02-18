@@ -32,7 +32,7 @@ resource "aws_lb_target_group" "main" {
 # https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RegisterTargets.html
 resource "aws_lb_target_group_attachment" "tg_attachment" {
     target_group_arn = aws_lb_target_group.main.arn
-    target_id        = var.aws_alb_target_group_arn
+    target_id        = var.aws_alb_id
     port             = 80
 }
 

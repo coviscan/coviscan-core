@@ -22,6 +22,6 @@ variable "health_check_path" {
   description = "Path to check if the service is healthy, e.g. \"/status\""
 }
 
-variable "aws_alb_target_group_arn" {
-  description = "ARN of the alb target group to attach to the nlb"
+variable "aws_alb_id" {
+  description = "Id of the alb target group to attach to the nlb"
 }
