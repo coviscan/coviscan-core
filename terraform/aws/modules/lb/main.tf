@@ -37,7 +37,7 @@ resource "aws_lb_target_group_attachment" "tg_attachment" {
 }
 
 output "aws_lb_target_group_arn" {
-  value = aws_alb_target_group.main.arn
+  value = aws_lb_target_group.main.arn
 }
 
 output "aws_lb_arn" {
