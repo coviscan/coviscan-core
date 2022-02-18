@@ -7,67 +7,36 @@ resource "aws_lb" "main" {
   enable_deletion_protection = false
 
   tags = {
-    Name        = "${var.name}-alb-${var.environment}"
+    Name        = "${var.name}-nlb-${var.environment}"
     Environment = var.environment
   }
 }
 
-resource "aws_alb_target_group" "main" {
-  name        = "${var.name}-tg-${var.environment}"
+
+resource "aws_lb_target_group" "main" {
+  name        = "${var.name}-nlb-tg-${var.environment}"
+  target_type = "alb"
   port        = 80
   protocol    = "TCP"
   vpc_id      = var.vpc_id
-  target_type = "ip"
 
   health_check {
     healthy_threshold   = "3"
-    interval            = "30"
     protocol            = "HTTP"
-    matcher             = "200"
-    timeout             = "3"
     path                = var.health_check_path
-    unhealthy_threshold = "2"
-  }
-
-  tags = {
-    Name        = "${var.name}-tg-${var.environment}"
-    Environment = var.environment
   }
 }
 
-# Redirect to https listener
-resource "aws_alb_listener" "http" {
-  load_balancer_arn = aws_lb.main.id
-  port              = 80
-  protocol          = "TCP"
-
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = 443
-      protocol    = "TLS"
-      status_code = "HTTP_301"
-    }
-  }
+# Create target group attachment
+# More details: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_TargetDescription.html
+# https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RegisterTargets.html
+resource "aws_lb_target_group_attachment" "tg_attachment" {
+    target_group_arn = aws_lb_target_group.main.arn
+    target_id        = var.aws_alb_target_group_arn
+    port             = 80
 }
 
-# Redirect traffic to target group
-resource "aws_alb_listener" "https" {
-    load_balancer_arn = aws_lb.main.id
-    port              = 443
-    protocol          = "TLS"
-
-    ssl_policy        = "ELBSecurityPolicy-2016-08"
-    certificate_arn   = var.alb_tls_cert_arn
-
-    default_action {
-        target_group_arn = aws_alb_target_group.main.id
-        type             = "forward"
-    }
-}
-
-output "aws_alb_target_group_arn" {
+output "aws_lb_target_group_arn" {
   value = aws_alb_target_group.main.arn
 }
 
