@@ -12,7 +12,6 @@ resource "aws_lb" "main" {
   }
 }
 
-
 resource "aws_lb_target_group" "main" {
   name        = "${var.name}-nlb-tg-${var.environment}"
   target_type = "alb"
@@ -27,13 +26,25 @@ resource "aws_lb_target_group" "main" {
   }
 }
 
+resource "aws_alb_listener" "http" {
+  load_balancer_arn = aws_lb.main.id
+  port              = 80
+  protocol          = "TCP"
+
+  default_action {
+    target_group_arn = aws_alb_target_group.main.id
+    type             = "forward"
+  }
+}
+
 # Create target group attachment
 # More details: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_TargetDescription.html
 # https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_RegisterTargets.html
 resource "aws_lb_target_group_attachment" "tg_attachment" {
-    target_group_arn = aws_lb_target_group.main.arn
-    target_id        = var.aws_alb_id
-    port             = 80
+  target_group_arn = aws_lb_target_group.main.arn
+  target_id        = var.aws_alb_id
+  port             = 80
+  depends_on = [aws_alb_listener.http]
 }
 
 output "aws_lb_target_group_arn" {

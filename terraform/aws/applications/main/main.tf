@@ -44,7 +44,6 @@ module "alb" {
   subnets             = module.vpc.public_subnets
   environment         = var.environment
   alb_security_groups = [module.security_groups.alb]
-  alb_tls_cert_arn    = var.tsl_certificate_arn
   health_check_path   = var.health_check_path
 }
 
@@ -89,4 +88,5 @@ module "api-gateway" {
   container_port      = var.container_port
   aws_lb_arn          = module.lb.aws_lb_arn
   aws_lb_dns_name     = module.lb.aws_lb_dns_name
+  tsl_certificate_arn = var.tsl_certificate_arn
 }

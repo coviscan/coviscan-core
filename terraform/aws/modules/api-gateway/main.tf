@@ -7,10 +7,19 @@ resource "aws_api_gateway_vpc_link" "main" {
   target_arns = [var.aws_lb_arn]
 }
 
+resource "aws_api_gateway_domain_name" "main" {
+  domain_name              = "api.coviscan.io"
+  regional_certificate_arn = var.tsl_certificate_arn
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
+}
+
 resource "aws_api_gateway_resource" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   parent_id   = aws_api_gateway_rest_api.main.root_resource_id
-  path_part   = "test"
+  path_part   = "/identity"
 }
 
 resource "aws_api_gateway_method" "main" {
@@ -40,7 +49,7 @@ resource "aws_api_gateway_integration" "main" {
   }
 
   type                    = "HTTP"
-  uri                     = "http://${var.aws_lb_dns_name}:${var.container_port}/{proxy}"
+  uri                     = "http://${var.aws_lb_dns_name}/identity"
   integration_http_method = "GET"
   passthrough_behavior    = "WHEN_NO_MATCH"
   content_handling        = "CONVERT_TO_TEXT"

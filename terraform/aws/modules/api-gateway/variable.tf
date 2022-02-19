@@ -18,3 +18,7 @@ variable "aws_lb_dns_name" {
 variable "container_port" {
   description = "The port where the Docker container is exposed"
 }
+
+variable "tsl_certificate_arn" {
+  description = "The ARN of the TLS certificate"
+}
