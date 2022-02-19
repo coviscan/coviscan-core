@@ -27,10 +27,6 @@ resource "aws_api_gateway_method" "main" {
   resource_id   = aws_api_gateway_resource.main.id
   http_method   = "GET"
   authorization = "NONE"
-
-  request_models = {
-    "application/json" = "Error"
-  }
 }
 
 resource "aws_api_gateway_integration" "main" {
@@ -58,6 +54,20 @@ resource "aws_api_gateway_integration" "main" {
   connection_id   = aws_api_gateway_vpc_link.main.id
 }
 
+resource "aws_api_gateway_method_response" "main" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.main.id
+  http_method = aws_api_gateway_method.main.http_method
+  status_code = "200"
+}
+
+resource "aws_api_gateway_integration_response" "main" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_resource.main.id
+  http_method = aws_api_gateway_method.main.http_method
+  status_code = aws_api_gateway_method_response.main.status_code
+}
+
 resource "aws_api_gateway_deployment" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   stage_name = "${var.environment}-env"
@@ -80,6 +90,19 @@ resource "aws_api_gateway_stage" "main" {
   deployment_id = aws_api_gateway_deployment.main.id
   rest_api_id   = aws_api_gateway_rest_api.main.id
   stage_name    = "${var.environment}-env"
+}
+
+resource "aws_api_gateway_method_settings" "all" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  stage_name  = aws_api_gateway_stage.main.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled = true
+    logging_level   = "ERROR"
+    throttling_burst_limit = 50
+    throttling_rate_limit = 10
+  }
 }
 
 resource "aws_api_gateway_base_path_mapping" "main" {
