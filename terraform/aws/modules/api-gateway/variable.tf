@@ -7,7 +7,7 @@ variable "environment" {
 }
 
 variable "aws_lb_arn" {
-  description = "ARN of the application load balancer"
+  description = "ARN of the NLB"
 }
 
 variable "aws_lb_dns_name" {

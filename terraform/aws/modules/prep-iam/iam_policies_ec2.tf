@@ -124,3 +124,8 @@ resource "aws_iam_role_policy_attachment" "ec2_full" {
   role       = aws_iam_role.main.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonVPCFullAccess"
 }
+
+resource "aws_iam_role_policy_attachment" "ec2" {
+  role       = aws_iam_role.main.name
+  policy_arn = aws_iam_policy.ec2.arn
+}

@@ -1,5 +1,5 @@
-resource "aws_iam_policy" "ecr_createrepository" {
-  name        = "${var.resource_name_prefix}_ecr_createrepository"
+resource "aws_iam_policy" "ecr" {
+  name        = "${var.resource_name_prefix}_ecr"
   description = ""
 
   policy = jsonencode({
@@ -17,27 +17,8 @@ resource "aws_iam_policy" "ecr_createrepository" {
           "ecr:DeleteLifecyclePolicy"
         ],
         "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "ecr_createrepository" {
-  role       = aws_iam_role.main.name
-  policy_arn = aws_iam_policy.ecr_createrepository.arn
-}
-
-/* ==================== */
-
-resource "aws_iam_policy" "ecr_pushpull" {
-  name        = "${var.resource_name_prefix}_ecr_pushpull"
-  description = ""
-
-  policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+      },
       {
-        "Sid": "VisualEditor0",
         "Effect": "Allow",
         "Action": [
           "ecr:GetDownloadUrlForLayer",
@@ -49,20 +30,8 @@ resource "aws_iam_policy" "ecr_pushpull" {
           "ecr:PutImage"
         ],
         "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_policy" "ecr_login" {
-  name        = "${var.resource_name_prefix}_ecr_login"
-  description = ""
-
-  policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+      },
       {
-        "Sid": "VisualEditor0",
         "Effect": "Allow",
         "Action": [
           "ecr:GetAuthorizationToken"
@@ -73,12 +42,7 @@ resource "aws_iam_policy" "ecr_login" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "ecr_pushpull" {
+resource "aws_iam_role_policy_attachment" "ecr" {
   role       = aws_iam_role.main.name
-  policy_arn = aws_iam_policy.ecr_pushpull.arn
-}
-
-resource "aws_iam_role_policy_attachment" "ecr_login" {
-  role       = aws_iam_role.main.name
-  policy_arn = aws_iam_policy.ecr_login.arn
+  policy_arn = aws_iam_policy.ecr.arn
 }

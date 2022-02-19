@@ -1,5 +1,5 @@
 resource "aws_lb" "main" {
-  name               = "${var.name}-alb-${var.environment}"
+  name               = "${var.name}-nlb-${var.environment}"
   internal           = true
   load_balancer_type = "network"
   subnets            = var.subnets.*.id
