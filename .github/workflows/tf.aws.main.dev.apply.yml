@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Create AWS ECS Fargate stack'
+    name: 'Create AWS Coviscan stack'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4

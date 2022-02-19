@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Destroy AWS ECS Fargate stack'
+    name: 'Destroy AWS Coviscan stack'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4
