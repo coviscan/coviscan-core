@@ -19,7 +19,7 @@ resource "aws_api_gateway_domain_name" "main" {
 resource "aws_api_gateway_resource" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   parent_id   = aws_api_gateway_rest_api.main.root_resource_id
-  path_part   = "/identity"
+  path_part   = "identity"
 }
 
 resource "aws_api_gateway_method" "main" {
@@ -84,6 +84,6 @@ resource "aws_api_gateway_stage" "main" {
 
 resource "aws_api_gateway_base_path_mapping" "main" {
   api_id      = aws_api_gateway_rest_api.main.id
-  stage_name  = "${var.environment}-env"
+  stage_name  = aws_api_gateway_stage.main.stage_name
   domain_name = aws_api_gateway_domain_name.main.domain_name
 }
