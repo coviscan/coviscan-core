@@ -14,6 +14,10 @@ resource "aws_api_gateway_domain_name" "main" {
   endpoint_configuration {
     types = ["REGIONAL"]
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_api_gateway_resource" "main" {
@@ -71,6 +75,7 @@ resource "aws_api_gateway_integration_response" "main" {
 resource "aws_api_gateway_deployment" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   stage_name = "${var.environment}-env"
+  stage_description = "${md5(file("main.tf"))}"
   depends_on = [aws_api_gateway_integration.main]
 
   variables = {
