@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Create AWS ECR Repository'
+    name: 'Create required AWS ECR repositories'
     runs-on: ubuntu-latest
     env:
       TF_VERSION: 1.1.4
