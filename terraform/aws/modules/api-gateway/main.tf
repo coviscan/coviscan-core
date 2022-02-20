@@ -18,10 +18,6 @@ resource "aws_api_gateway_domain_name" "main" {
   mutual_tls_authentication {
     truststore_uri = "${var.s3_truststore_uri}"
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_api_gateway_resource" "main" {
