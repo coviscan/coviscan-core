@@ -19,7 +19,7 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
-module "ecr-repository-dcc" {
+module "ecr-repository" {
   source = "../../modules/ecr"
   aws_ecr_repository_name = "dcc-validation-decorator"
 }
