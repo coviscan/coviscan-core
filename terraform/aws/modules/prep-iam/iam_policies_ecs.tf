@@ -27,6 +27,11 @@ resource "aws_iam_policy" "ecs" {
         "Resource": [
           "*"
         ]
+      },
+      {
+        "Effect": "Allow",
+        "Action": "application-autoscaling:*",
+        "Resource": "*"
       }
     ]
   })

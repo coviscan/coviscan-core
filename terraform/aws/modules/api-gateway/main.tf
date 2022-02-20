@@ -18,6 +18,8 @@ resource "aws_api_gateway_domain_name" "main" {
   mutual_tls_authentication {
     truststore_uri = "${var.s3_truststore_uri}"
   }
+
+  security_polics = "TLS_1_2"
 }
 
 resource "aws_api_gateway_resource" "main" {
