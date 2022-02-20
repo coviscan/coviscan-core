@@ -15,11 +15,11 @@ exports.handler = async (event)=> {
       let sub    = cert.subject.getField('CN').value.trim();
 
       if ( iss !== null && iss == "free" ) {
-        let policy = generate_iam_policy(sub, "free_key");
+        let policy = generate_iam_policy(sub, "free_key_r1hu21cfpuruk5kk1vip1scb8esh5r");
         console.log("IAM Policy- ", JSON.stringify(policy));
         return policy;
       } else if ( iss !== null && iss == "enterprise" ) {
-        let policy = generate_iam_policy(sub, "enterprise_key");
+        let policy = generate_iam_policy(sub, "enterprise_key_gvy52b7lmzd10led2l781bk8wdb8wj");
         console.log("IAM Policy- ", JSON.stringify(policy));
         return policy;
       } else {

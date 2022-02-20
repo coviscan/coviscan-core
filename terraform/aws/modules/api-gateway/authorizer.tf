@@ -63,6 +63,4 @@ resource "aws_lambda_function" "authorizer" {
   role          = aws_iam_role.lambda.arn
   handler       = "index.handler"
   image_uri     = "${var.container_image}:latest"
-
-  source_code_hash = filebase64sha256("lambda-function.zip")
 }

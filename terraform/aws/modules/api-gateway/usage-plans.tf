@@ -36,7 +36,7 @@ resource "aws_api_gateway_usage_plan" "enterprise" {
 resource "aws_api_gateway_api_key" "free" {
   name = "free_key"
   enabled = false
-  value = "free_key"
+  value = "free_key_r1hu21cfpuruk5kk1vip1scb8esh5r"
 }
 
 resource "aws_api_gateway_usage_plan_key" "free" {
@@ -49,7 +49,7 @@ resource "aws_api_gateway_usage_plan_key" "free" {
 resource "aws_api_gateway_api_key" "enterprise" {
   name = "enterprise_key"
   enabled = false
-  value = "enterprise_key"
+  value = "enterprise_key_gvy52b7lmzd10led2l781bk8wdb8wj"
 }
 
 resource "aws_api_gateway_usage_plan_key" "enterprise" {
