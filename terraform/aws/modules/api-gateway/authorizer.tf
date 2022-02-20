@@ -61,6 +61,7 @@ resource "aws_iam_role" "lambda" {
 resource "aws_lambda_function" "authorizer" {
   function_name = "${var.name}-api-gateway-authorizer-${var.environment}"
   role          = aws_iam_role.lambda.arn
+  package_type  = "Image"
   handler       = "index.handler"
   image_uri     = "${var.container_image}:latest"
 }
