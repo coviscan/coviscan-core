@@ -19,7 +19,12 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
-module "ecr-repository" {
+module "ecr-repository-dcc" {
   source = "../../modules/ecr"
-  aws_ecr_repository_name = "${var.aws_ecr_repository_name}"
+  aws_ecr_repository_name = "dcc-validation-decorator"
+}
+
+module "ecr-repository-lambda-authorizer" {
+  source = "../../modules/ecr"
+  aws_ecr_repository_name = "x509-authorizer"
 }
