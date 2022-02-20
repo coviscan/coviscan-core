@@ -1,6 +1,12 @@
 name: 'lambda.authorizer.build'
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+
+permissions:
+  id-token: write
+  contents: read 
 
 jobs:
   deploy_source:
