@@ -90,4 +90,5 @@ module "api-gateway" {
   aws_lb_dns_name     = module.lb.aws_lb_dns_name
   tsl_certificate_arn = var.tsl_certificate_arn
   s3_truststore_uri   = var.s3_truststore_uri
+  container_image     = var.container_image_authorizer
 }

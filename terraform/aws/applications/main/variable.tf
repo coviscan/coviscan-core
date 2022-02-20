@@ -63,6 +63,10 @@ variable "container_image" {
   description = "Docker image to be launched"
 }
 
+variable "container_image_authorizer" {
+  description = "Docker image of lambda authorizer"
+}
+
 variable "health_check_path" {
   description = "Http path for task health check"
   default     = "/identity"

@@ -8,6 +8,7 @@ tsl_certificate_arn = "arn:aws:acm:eu-central-1:161247518108:certificate/631ba7e
 container_memory    = 2048
 container_cpu       = 1024
 container_image     = "161247518108.dkr.ecr.eu-central-1.amazonaws.com/dcc-validation-decorator"
+container_image_authorizer = "161247518108.dkr.ecr.eu-central-1.amazonaws.com/x509-authorizer"
 container_port      = 8080
 health_check_path   = "/identity"
 s3_truststore_uri   = "s3://coviscan-truststore/truststore.pem"

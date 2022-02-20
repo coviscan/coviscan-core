@@ -28,3 +28,6 @@ variable "s3_truststore_uri" {
   description = "S3 mTLS truststore URI, e.g. s3://bucket-name/key-name "
 }
 
+variable "container_image" {
+  description = "Docker image of lambda authorizer "
+}
