@@ -15,6 +15,10 @@ resource "aws_api_gateway_domain_name" "main" {
     types = ["REGIONAL"]
   }
 
+  mutual_tls_authentication {
+    truststore_uri = "${var.s3_truststore_uri}"
+  }
+
   lifecycle {
     prevent_destroy = true
   }
@@ -37,16 +41,6 @@ resource "aws_api_gateway_integration" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
   resource_id = aws_api_gateway_resource.main.id
   http_method = aws_api_gateway_method.main.http_method
-
-  request_templates = {
-    "application/json" = ""
-    "application/xml"  = "#set($inputRoot = $input.path('$'))\n{ }"
-  }
-
-  request_parameters = {
-    "integration.request.header.X-Authorization" = "'static'"
-    "integration.request.header.X-Foo"           = "'Bar'"
-  }
 
   type                    = "HTTP"
   uri                     = "http://${var.aws_lb_dns_name}/identity"

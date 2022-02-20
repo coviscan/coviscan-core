@@ -22,3 +22,9 @@ variable "container_port" {
 variable "tsl_certificate_arn" {
   description = "The ARN of the TLS certificate"
 }
+
+variable "s3_truststore_uri" {
+  type = string
+  description = "S3 mTLS truststore URI, e.g. s3://bucket-name/key-name "
+}
+
