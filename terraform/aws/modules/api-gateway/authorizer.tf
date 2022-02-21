@@ -72,11 +72,11 @@ resource "aws_iam_role_policy" "ecr_policy" {
           "ecr:GetDownloadUrlForLayer"
         ],
         "Effect": "Allow",
-        "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*
+        "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*"
       }
     ]
   })
-} 
+}
 
 resource "aws_lambda_function" "authorizer" {
   function_name = "${var.name}-api-gateway-authorizer-${var.environment}"
