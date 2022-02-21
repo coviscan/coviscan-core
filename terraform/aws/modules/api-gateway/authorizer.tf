@@ -67,14 +67,12 @@ resource "aws_iam_role_policy" "ecr_policy" {
     "Statement": [
       {
         "Sid": "LambdaECRImageRetrievalPolicy",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "lambda.amazonaws.com"
-        },
         "Action": [
           "ecr:BatchGetImage",
           "ecr:GetDownloadUrlForLayer"
-        ]
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:ecr:*:${local.account_id}:repository/*
       }
     ]
   })
