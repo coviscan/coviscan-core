@@ -67,3 +67,7 @@ After setting up the initial bootstrap user you have to execute the bootstraping
 ```bash
 bash /bin/tf/aws/bootstrap_create_iam_roles.sh 
 ```
+
+## Load testing
+
+We are load testing using [k6](https://k6.io/) from Grafana Labs. For installation instructions see [here](https://k6.io/docs/getting-started/installation/).
