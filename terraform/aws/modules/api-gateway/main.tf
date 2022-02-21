@@ -1,5 +1,7 @@
 resource "aws_api_gateway_rest_api" "main" {
-  name = "${var.name}-gateway_rest_api-${var.environment}" 
+  name = "${var.name}-gateway_rest_api-${var.environment}"
+
+  disable_execute_api_endpoint = true
 }
 
 resource "aws_api_gateway_vpc_link" "main" {

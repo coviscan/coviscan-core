@@ -58,10 +58,40 @@ resource "aws_iam_role" "lambda" {
   })
 }
 
+resource "aws_iam_role_policy" "invocation_policy" {
+  name = "${var.name}-lambda-ecr-${var.environment}"
+  role = aws_iam_role.lambda.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "LambdaECRImageRetrievalPolicy",
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "lambda.amazonaws.com"
+        },
+        "Action": [
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer"
+        ]
+      }
+    ]
+  })
+} 
+
 resource "aws_lambda_function" "authorizer" {
   function_name = "${var.name}-api-gateway-authorizer-${var.environment}"
   role          = aws_iam_role.lambda.arn
   package_type  = "Image"
   handler       = "index.handler"
   image_uri     = "${var.container_image}:latest"
+
+  runtime = "nodejs12.x"
+
+  environment {
+    variables = {
+      foo = "bar"
+    }
+  }
 }
