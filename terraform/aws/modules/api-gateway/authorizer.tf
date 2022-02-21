@@ -58,7 +58,7 @@ resource "aws_iam_role" "lambda" {
   })
 }
 
-resource "aws_iam_role_policy" "invocation_policy" {
+resource "aws_iam_role_policy" "ecr_policy" {
   name = "${var.name}-lambda-ecr-${var.environment}"
   role = aws_iam_role.lambda.id
 
