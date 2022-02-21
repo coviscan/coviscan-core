@@ -2,6 +2,11 @@ resource "aws_api_gateway_usage_plan" "free" {
   name         = "${var.name}-up-free-${var.environment}"
   description  = "Free usage plan"
 
+  api_stages {
+    api_id = aws_api_gateway_rest_api.main.id
+    stage  = aws_api_gateway_stage.main.stage_name
+  }
+
   quota_settings {
     limit  = 10
     period = "MONTH"
