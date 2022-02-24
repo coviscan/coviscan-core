@@ -208,3 +208,15 @@ resource "aws_api_gateway_base_path_mapping" "public" {
   stage_name  = aws_api_gateway_stage.public.stage_name
   domain_name = aws_api_gateway_domain_name.public.domain_name
 }
+
+resource "namecheap_domain_records" "main" {
+  domain = "coviscan.io"
+  mode = "MERGE"
+
+  record {
+    hostname = "api"
+    type = "ALIAS"
+    address = "11.22.33.44"
+    ttl = 300
+  }
+}

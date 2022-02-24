@@ -16,6 +16,10 @@ jobs:
       TF_WORKSPACE: dev
       AWS_REGION: eu-central-1
       AWS_ACCOUNT_ID: 161247518108
+      NAMECHEAP_USER_NAME: ${{ secrets.NAMECHEAP_USER_NAME }}
+      NAMECHEAP_API_USER: ${{ secrets.NAMECHEAP_API_USER }}
+      NAMECHEAP_API_KEY: ${{ secrets.NAMECHEAP_API_KEY }}
+
     environment: dev
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest

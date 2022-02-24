@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.0"
     }
+    namecheap = {
+      source = "namecheap/namecheap"
+      version = ">= 2.1.0"
+    }
   }
 
   backend "s3" {
@@ -17,6 +21,11 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = "${var.aws_region}"
+}
+
+# Configure the Namecheap Provider
+provider "namecheap" {
+  use_sandbox = false
 }
 
 module "vpc" {
