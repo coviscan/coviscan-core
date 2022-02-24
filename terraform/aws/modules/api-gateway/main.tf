@@ -216,7 +216,19 @@ resource "namecheap_domain_records" "main" {
   record {
     hostname = "api"
     type = "ALIAS"
-    address = "11.22.33.44"
+    address = aws_api_gateway_domain_name.main.domain_name
+    ttl = 300
+  }
+}
+
+resource "namecheap_domain_records" "public" {
+  domain = "coviscan.io"
+  mode = "MERGE"
+
+  record {
+    hostname = "api-public"
+    type = "ALIAS"
+    address = aws_api_gateway_domain_name.public.domain_name
     ttl = 300
   }
 }
