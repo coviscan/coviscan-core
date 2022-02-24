@@ -29,5 +29,5 @@ variable "s3_truststore_uri" {
 }
 
 variable "container_image" {
-  description = "Docker image of lambda authorizer "
+  description = "Docker image of lambda authorizer"
 }
